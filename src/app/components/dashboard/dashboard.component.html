@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6" *ngIf="existIng == true ">
+      <div class="card">
+        <a [routerLink]="['/ver-usuarios/productores']" class="clicks">
+
+          <a style="text-decoration: none" [routerLink]="['/ver-usuarios/productores']" class="clicks">
+            <div class="card-body">
+              <img src="../../../assets/imagenes/login/productoresabrir.png" class="img1" alt="AGREGAR PRODUCTORES">
+              <h5 class="card-title">PRODUCTORES</h5>
+            </div>
+          </a>
+        </a>
+      </div>
+
+    </div>
+    <div class="col-6" *ngIf="existIng == true " >
+      <a style="text-decoration: none" [routerLink]="['/receta']" class="clicks">
+        <div class="card">
+          <div class="card-body clicks">
+            <img src="../../../assets/imagenes/login/3.png" class="img1" alt="AGREGAR PRODUCTORES">
+            <h5 class="card-title">ASESORIAS</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6"  *ngIf="existMas == true ">
+      <a style="text-decoration: none" [routerLink]="['/agregar-usuarios/']" class="clicks">
+        <div class="card">
+          <div class="card-body clicks">
+            <img src="../../../assets/imagenes/login/4.png" class="img1" alt="AGREGAR PRODUCTORES">
+            <h5 class="card-title">AGREGAR</h5>
+          </div>
+
+        </div>
+      </a>
+    </div>
+    <div class="col-6" *ngIf="existIng == false ">
+      <a style="text-decoration: none" [routerLink]="['/ver-usuarios/ingenieros']" class="clicks">
+        <div class="card">
+          <div class="card-body clicks">
+            <img src="../../../assets/imagenes/login/5.png" class="img1" alt="AGREGAR PRODUCTORES">
+            <h5 class="card-title">AGRONOMOS</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-6">
+      <a style="text-decoration: none" [routerLink]="['/agenda/',id]" class="clicks">
+        <div class="card">
+          <div class="card-body clicks">
+            <img src="../../../assets/imagenes/login/agenda.png" class="img1" alt="AGENDA">
+            <h5 class="card-title">MI AGENDA</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

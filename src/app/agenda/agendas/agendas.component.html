@@ -1,0 +1,29 @@
+
+<h2 style="text-align: center; padding-top: 1em;">CALENDARIO DE CITAS</h2>
+<full-calendar *ngIf="calendarVisible" #Calendar [options]='calendarOptions'></full-calendar>
+
+<div class="modal-dialog modal-lg">
+  <ng-template #modalContent >
+    <div class="modal-header">
+      <h2 class="modal-title w-100 text-center">AGREGAR CITA </h2>
+      <button type="button" class="close" (click)="hideModal()" data-dismiss="modal" aria-label="Close">
+        <span  aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+
+
+
+    <div class="modal-body">
+    <app-solicitud></app-solicitud>
+
+    </div>
+    <div class="modal-footer">
+
+    </div>
+
+
+
+
+  </ng-template>
+</div>

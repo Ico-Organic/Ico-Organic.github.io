@@ -1,0 +1,74 @@
+.mar{
+    margin: 2.5em 0em 1em 0em;
+}
+H2{
+    text-align: center;
+}
+.thead-dark{
+    background: #6EA96F;
+    color: white;
+    text-align: center;
+    font-weight: 400 !important;
+
+}
+tbody tr{
+    border-bottom: 0.2em solid #cccc;
+    text-align: center;
+}
+.marg{
+    padding: 0em 1em 0.5em 1em;
+
+}
+.ss{
+    text-transform: uppercase;
+}
+
+::ng-deep #basicPaginate .ngx-pagination {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: #6EA96F;
+    color: white;
+    padding: 0 !important;
+    padding-bottom: 0.5em !important;
+    padding-top: 0.5em !important;
+    margin-bottom: -2em;
+}
+::ng-deep .pagination-previous a {
+    visibility: hidden;
+}
+::ng-deep .pagination-previous a:before {
+    content: "Anterior" !important;
+    visibility:visible;
+}
+::ng-deep .pagination-previous span {
+    visibility: hidden;
+}
+::ng-deep .pagination-previous span:before {
+    content: "Anterior";
+    visibility:visible;
+}
+
+::ng-deep .pagination-next span {
+    visibility: hidden;
+}
+::ng-deep .pagination-next span:before {
+    content: "Siguente";
+    visibility:visible;
+}
+::ng-deep .pagination-next a {
+    visibility: hidden;
+}
+::ng-deep .pagination-next a:before {
+    content: "Siguente";
+    visibility:visible;
+}
+::ng-deep .ngx-pagination .current {
+    background: #ffffff !important;
+    color: #6EA96F !important;
+}
+::ng-deep ul .ngx-pagination {
+    margin-right: 1em;
+}
+
+

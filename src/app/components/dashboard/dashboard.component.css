@@ -1,0 +1,22 @@
+
+.img1{
+    width: 94%;
+    margin-left: 0.5em;
+}
+h5{
+    text-align: center;
+
+}
+.clicks{
+    cursor: pointer;
+}
+.se{
+    width: 50%;
+}
+.card{
+    box-shadow: 5px 5px 0px 1px rgb(110, 169, 111);
+    margin-bottom: 1em;
+}   
+.container{
+    padding-bottom: 2em;
+}

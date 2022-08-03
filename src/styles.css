@@ -1,0 +1,171 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html, body {
+    height: 100%;
+}
+.colorico{
+    background: #269911 !important;
+    
+}
+::ng-deep  .cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 10000 !important;
+    }
+.btn-success {
+    background: #269911 !important;
+    border-radius: 0.8em !important;
+    border-color:#269911 !important ;
+}
+.topb{
+    margin-top: 2em;
+}
+.btn-primary {
+    background: #269911 !important;
+    border-radius: 0.8em !important;
+    border-color:#269911 !important ;
+}
+.eng{
+    display: flex;
+    padding-left: 3em;
+
+}
+.mybtnclass{
+    background: transparent;
+    border: 0px;
+    
+  }
+.izq{
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 1em 2em 0em 0em;
+
+}
+.der{
+    display: flex;
+    padding:0em 2em 0em 1em;
+
+}
+h1{
+    color: rgb(110, 169, 111) !important;
+    font-weight: 600 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    text-align: center ;
+    font-size: 3em !important;
+}
+h2{
+    color: rgb(110, 169, 111) !important;
+    font-weight: 700 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    text-align: center !important;
+    font-size: 1.5em !important;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f5f5f5;
+}
+::ng-deep .swal2-container.swal2-center>.swal2-popup {
+    top: -9em;
+}
+.imgs{
+    margin: -3em 0em -3em 6em;
+}
+.ss{
+    padding-bottom: 2em;
+}
+.logo {
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.body {
+    width: 100%;
+    max-width: 330px;
+    margin: auto;
+    padding: 15px;
+    text-align: center;
+}
+
+.form-floating {
+    text-align: start;
+}
+
+.errorLabel {
+    margin-left: 5px;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    background-color: #F8F8F8!important;
+    margin: 0 0 125px 0!important;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.rojo {
+    background-color: #FC041C;
+}
+
+.texto-rojo {
+    color: #FC041C;
+}
+
+.gris {
+    background-color: #646464;
+}
+
+.negro {
+    background-color: #242424;
+}
+
+.amarillo {
+    background-color: #FCC42C;
+}
+
+.verde {
+    background-color: #6CC474;
+}
+
+.naranja {
+    background-color: #FC6434;
+}
+
+body::-webkit-scrollbar,
+.container::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar,
+div::-webkit-scrollbar {
+    width: 14px;
+    background-color: #242424;
+}
+
+select::-webkit-scrollbar {
+    width: 14px;
+    background-color: white;
+}
+
+body::-webkit-scrollbar-thumb,
+.container::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    border-right: 2px solid #242424;
+}
+
+select::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    border-right: 2px solid #d4d4d4;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,451 @@
+<h1>PERFIL</h1>
+
+<app-ficha></app-ficha>
+<div class="eng">
+    <div *ngIf="existMas == true">
+        <button *ngIf="exist == true" type="button" [routerLink]="['/agendar/', user.id]" class="btn btn-success">CREAR
+            CITA</button>
+    </div>
+</div>
+
+<h2 style="text-align: center; padding-top: 1em;">CITAS</h2>
+<div class="sty">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab>
+            <ng-template matTabLabel>
+                <span    matBadgeOverlap="false">ENVIADAS</span>
+            </ng-template>
+
+                <mat-tab-group mat-align-tabs="center">
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span  matBadge="{{citasHoy.length}}"  matBadgeOverlap="false">HOY</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasHoy.length != 0" class="example-accordion">
+                            <cdk-accordion-item *ngFor="let item of citasHoy; let index = index;" #accordionItem="cdkAccordionItem"
+                                class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+                                [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorBy.nombre}} {{item.solicitorBy.apellidoPa}}
+                                                {{item.solicitorBy.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+            
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov != 0">
+                                            <td>Folio receta: </td>
+                                            <td>{{item.receta._id}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov == 0">
+                                            <td>Folio receta: </td>
+                                            <td>No tiene receta</td>
+            
+                                        </tr>
+            
+                                        <tr>
+                                            <div style="display: flex;">
+                                                <button type="button" (click)="cancelarcita('hoy',index)"
+                                                    class="btn btn-warning">CANCELAR</button>
+                                                <button type="button" *ngIf="item.receta.nov == 0 && exist == true"
+                                                    (click)="AgregarReceta(item.parcela._id,item.parcela.productor,item._id)"
+                                                    class="btn btn-success">CREAR RECETA</button>
+                                            </div>
+            
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                            <div></div>
+                        </cdk-accordion>
+                        <div *ngIf="citasHoy.length == 0" class="pad">
+                            <p>NO HAY CITAS PARA HOY</p>
+                        </div>
+                    </mat-tab>
+            
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span matBadgeOverlap="false">PENDIENTE</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasPendientes.length != 0" class="example-accordion">
+                            <cdk-accordion-item *ngFor="let item of citasPendientes; let index = index; "
+                                #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+                                [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                                [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorBy.nombre}} {{item.solicitorBy.apellidoPa}}
+                                                {{item.solicitorBy.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+            
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr>
+                                            <div style="display: flex;">
+                                                <button type="button" (click)="cancelarcita('pen',item,index)"
+                                                    class="btn btn-warning">CANCELAR</button>
+                                                <button type="button" *ngIf="existMas == true && item.solicitorTo.nombre!"
+                                                    (click)="aceptarCita('pen',item,index,'front')"
+                                                    class="btn btn-success">ACEPTAR</button>
+            
+                                            </div>
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                        </cdk-accordion>
+            
+                        <div *ngIf="citasPendientes.length == 0" class="pad">
+                            <p>NO HAY CITAS PENDIENTES</p>
+                        </div>
+                    </mat-tab>
+            
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span  matBadgeOverlap="false">HISTORIAL</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasAll.length != 0">
+                            <cdk-accordion-item *ngFor="let item of citasAll | paginate: config3; let index = index;"
+                                #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+                                [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                                [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorBy.nombre}} {{item.solicitorBy.apellidoPa}}
+                                                {{item.solicitorBy.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov != 0">
+                                            <td>Folio receta: </td>
+                                            <td>{{item.receta._id}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov == 0">
+                                            <td>Folio receta: </td>
+                                            <td>No tiene receta</td>
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                        </cdk-accordion>
+            
+                        <pagination-controls *ngIf="citasAll.length != 0" id="basicPaginate3" (pageChange)="pageChanged3($event)">
+                        </pagination-controls>
+            
+                        <div *ngIf="citasAll.length == 0" class="pad">
+                            <p>NO HAY CITAS</p>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+        </mat-tab>
+        <mat-tab>
+            <ng-template matTabLabel>
+                <span matBadge="{{citasPendientes2.length}}" matBadgeOverlap="false">RECICIDAS</span>
+            </ng-template>
+
+                <mat-tab-group mat-align-tabs="center">
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span matBadge="{{citasHoy2.length}}" matBadgeOverlap="false">HOY</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasHoy2.length != 0" class="example-accordion">
+                            <cdk-accordion-item *ngFor="let item of citasHoy2; let index = index;" #accordionItem="cdkAccordionItem"
+                                class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+                                [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorTo.nombre}} {{item.solicitorTo.apellidoPa}}
+                                                {{item.solicitorTo.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+            
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov != 0">
+                                            <td>Folio receta: </td>
+                                            <td>{{item.receta._id}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov == 0">
+                                            <td>Folio receta: </td>
+                                            <td>No tiene receta</td>
+            
+                                        </tr>
+            
+                                        <tr>
+                                            <div style="display: flex;">
+                                                <button type="button" (click)="cancelarcita2('hoy',index)"
+                                                    class="btn btn-warning">CANCELAR</button>
+                                                <button type="button" *ngIf="item.receta.nov == 0 && exist == true"
+                                                    (click)="AgregarReceta(item.parcela._id,item.parcela.productor,item._id)"
+                                                    class="btn btn-success">CREAR RECETA</button>
+                                            </div>
+            
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                            <div></div>
+                        </cdk-accordion>
+                        <div *ngIf="citasHoy2.length == 0" class="pad">
+                            <p>NO HAY CITAS PARA HOY</p>
+                        </div>
+                    </mat-tab>
+            
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span  matBadgeOverlap="false">PENDIENTE</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasPendientes2.length != 0" class="example-accordion">
+                            <cdk-accordion-item *ngFor="let item of citasPendientes2; let index = index; "
+                                #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+                                [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                                [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorTo.nombre}} {{item.solicitorTo.apellidoPa}}
+                                                {{item.solicitorTo.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+            
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr>
+                                            <div style="display: flex;">
+                                                <button type="button" (click)="cancelarcita2('pen',item,index)"
+                                                    class="btn btn-warning">CANCELAR</button>
+                                                <button type="button" *ngIf="existMas == true  "
+                                                    (click)="aceptarCita2('pen',item,index,'front')"
+                                                    class="btn btn-success">ACEPTAR</button>
+            
+                                            </div>
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                        </cdk-accordion>
+            
+                        <div *ngIf="citasPendientes2.length == 0" class="pad">
+                            <p>NO HAY CITAS PENDIENTES</p>
+                        </div>
+                    </mat-tab>
+            
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <span  matBadgeOverlap="false">HISTORIAL</span>
+                        </ng-template>
+                        <cdk-accordion *ngIf="citasAll2.length != 0">
+                            <cdk-accordion-item *ngFor="let item of citasAll2 | paginate: config4; let index = index;"
+                                #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+                                [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                                [attr.aria-controls]="'accordion-body-' + index">
+                                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                                    {{ item.tipo }}
+                                    <span class="example-accordion-item-description">
+                                        {{item.fechaIni}} {{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}
+                                    </span>
+                                </div>
+                                <div class="example-accordion-item-body" role="region"
+                                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                                    [attr.aria-labelledby]="'accordion-header-' + index">
+                                    <table>
+            
+                                        <tr>
+                                            <td>USUARIO:</td>
+                                            <td>{{item.solicitorTo.nombre}} {{item.solicitorTo.apellidoPa}}
+                                                {{item.solicitorTo.apellidoMa}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LUGAR:</td>
+                                            <td>{{item.parcela.calle}} {{item.parcela.colonia}}
+                                                {{item.parcela.estado.substr(0, 3)}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>FECHA:</td>
+                                            <td>{{item.fechaIni}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TIPO: </td>
+                                            <td>{{item.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>HORA: </td>
+                                            <td>{{item.horaIni}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov != 0">
+                                            <td>Folio receta: </td>
+                                            <td>{{item.receta._id}}</td>
+                                        </tr>
+                                        <tr *ngIf="item.receta.nov == 0">
+                                            <td>Folio receta: </td>
+                                            <td>No tiene receta</td>
+                                        </tr>
+            
+                                    </table>
+                                </div>
+                            </cdk-accordion-item>
+                        </cdk-accordion>
+            
+                        <pagination-controls *ngIf="citasAll2.length != 0" id="basicPaginate4" (pageChange)="pageChanged4($event)">
+                        </pagination-controls>
+            
+                        <div *ngIf="citasAll2.length == 0" class="pad">
+                            <p>NO HAY CITAS</p>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+        </mat-tab>
+    </mat-tab-group>
+
+    
+
+</div>
+
+
+<div class="izq">
+    <button type="button" [routerLink]="['/agenda/',user.id]" class="btn btn-success">MI AGENDA</button>
+</div>
+
+<div *ngIf="exist == false">
+    <app-view-parcelas></app-view-parcelas>
+</div>

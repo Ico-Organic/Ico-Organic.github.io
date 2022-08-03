@@ -1,0 +1,148 @@
+<div class="container">
+    <form [formGroup]="addEventForm2">
+        <select #selectList *ngIf="productores.length != 0" id="SelecServ" class="form-control si"
+            (change)="chooseprod(selectList.value)" formControlName="productor" name="productor" id="productor">
+            <option selected value="">Seleccione Productor</option>
+            <option #value *ngFor="let prod of productores" value="{{prod._id}}">{{ prod.nombre }} {{ prod.apellidoPa }}
+            </option>
+        </select>
+
+        <select #selectList2 id="SelecServ" class="form-control si" formControlName="parcela"
+            (change)="choosepar(selectList2.value)" name="parcela" id="parcela">
+            <option selected value="">Seleccione Parcela</option>
+            <option *ngFor="let par of parcelaFil" [value]="par._id">{{par.nombre}}</option>
+        </select>
+    </form>
+</div>
+<div class="container">
+    <h2 style="text-transform: uppercase; text-align: center">asesoría técnica</h2>
+    <div>
+        <form class="forms" [formGroup]="secondFormGroup">
+            <div class="form-group">
+                <label class="col-2">ATENDIÓ</label>
+                <input class="col-6" type="text" formControlName="atendio">
+                <label class="col-2">N. VISTA</label>
+                <input class="col-2" type="text" formControlName="novista">
+            </div>
+            <div class="form-group">
+                <label class="col-2">PRODUCTOR</label>
+                <input class="col-6" type="text" formControlName="productor">
+                <label class="col-2">SUP</label>
+                <input class="col-2" type="text" formControlName="sup">
+            </div>
+            <div class="form-group">
+                <label class="col-2">CULTIVO</label>
+                <input class="col-4" type="text" formControlName="cultivo">
+                <label class="col-2">MUNICIPIO</label>
+                <input class="col-4" type="text" formControlName="mun">
+
+            </div>
+            <div class="form-group">
+                <label class="col-2">EJIDO</label>
+                <input class="col-4" type="text" formControlName="ejido">
+                <label class="col-2">CONTACTO</label>
+                <input class="col-4" type="text" formControlName="contac">
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+<mat-stepper id="stepreceta" orientation="vertical" #stepper>
+    <mat-step [stepControl]="suelos">
+        <form [formGroup]="suelos" class="grid">
+            <ng-template matStepLabel>SUELO</ng-template>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label class="lab">OXI POWER</mat-label>
+                <input matInput placeholder="Oxi power" formControlName="oxisul">
+                <mat-error *ngIf="this.suelos.controls['oxisul'].invalid && this.suelos.controls['oxisul'].touched">
+                    Campo requerido</mat-error>
+
+            </mat-form-field>
+
+           
+
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">ENRAIZADOR</mat-label>
+                <input matInput  placeholder="Enraizador" formControlName="enraizadorsul" >
+                <mat-error *ngIf="this.suelos.controls['enraizadorsul'].invalid && this.suelos.controls['enraizadorsul'].touched">
+                    Campo requerido</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">VEGETATIVO</mat-label>
+                <input matInput  placeholder="Vegetativo" formControlName="vegetativosul" >
+                <mat-error *ngIf="this.suelos.controls['vegetativosul'].invalid && this.suelos.controls['vegetativosul'].touched">
+                    Campo requerido</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">FLORACION</mat-label>
+                <input matInput  placeholder="Floracion" formControlName="floracionsul" >
+                <mat-error *ngIf="this.suelos.controls['floracionsul'].invalid && this.suelos.controls['floracionsul'].touched">
+                    Campo requerido</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">ENGORDE</mat-label>
+                <input matInput  placeholder="Engorde" formControlName="engordesul" >
+                <mat-error *ngIf="this.suelos.controls['engordesul'].invalid && this.suelos.controls['engordesul'].touched">
+                    Campo requerido</mat-error>
+
+            </mat-form-field>
+
+            <div>
+                <button mat-button matStepperNext class="suus s">SIGUENTE</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="foliares">
+        <form [formGroup]="foliares" class="grid">
+            <ng-template matStepLabel>FOLIARES</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">OXI POWER</mat-label>
+                <input  matInput placeholder="Oxi power" formControlName="oxifol" >
+                <mat-error *ngIf="this.foliares.controls['oxifol'].invalid && this.foliares.controls['oxifol'].touched">
+                    Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">ENRAIZADOR</mat-label>
+                <input  matInput placeholder="Enraizador" formControlName="enraizadorfol" >
+                <mat-error *ngIf="this.foliares.controls['enraizadorfol'].invalid && this.foliares.controls['enraizadorfol'].touched">
+                    Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">VEGETATIVO</mat-label>
+                <input  matInput placeholder="Vegetativo" formControlName="vegetativofol" >
+                <mat-error *ngIf="this.foliares.controls['vegetativofol'].invalid && this.foliares.controls['vegetativofol'].touched">
+                    Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">FLORACION</mat-label>
+                <input  matInput placeholder="Floracion" formControlName="floracionfol" >
+                <mat-error *ngIf="this.foliares.controls['floracionfol'].invalid && this.foliares.controls['floracionfol'].touched">
+                    Campo requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label class="lab">ENGORDE</mat-label>
+                <input  matInput placeholder="Engorde" formControlName="engordefol" >
+                <mat-error *ngIf="this.foliares.controls['engordefol'].invalid && this.foliares.controls['engordefol'].touched">
+                    Campo requerido</mat-error>
+            </mat-form-field>
+
+            <div>
+                <button mat-button matStepperPrevious class="suus">ANTERIOR</button>
+                <button [disabled]="suelos.invalid && foliares.invalid" type="submit" (click)="submitReceta()"
+                    mat-button matStepperNext class="suus s">ENVIAR</button>
+            </div>
+            <div>
+            </div>
+        </form>
+    </mat-step>
+
+</mat-stepper>

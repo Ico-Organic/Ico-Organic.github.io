@@ -1,0 +1,34 @@
+
+<div  class="marg">
+    <h2>HISTORIAL DE ASESORIAS</h2>
+   
+    <table class="table mar">
+        <thead class="thead-dark">
+            <tr>
+                <th style="width: 30%;" colspan="2" scope="col">FECHA</th>
+                <th scope="col">VISITA</th>
+                <th scope="col">DESCARGAR</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="asesorias.length != 0 ">
+            <tr *ngFor="let prod of asesorias | paginate: config" (click)="ChoosePac(prod)">
+                <td style=" padding-top: 1.5em;">{{ prod.parcela.nombre }}</td>
+                <td style="width: 30%; padding-top: 1.5em;" colspan="2">{{ prod.fecha.substr(0,10)}} </td>
+
+                <td><img src="../../../assets/imagenes/login/pdf.png" width="30%" class="sed" alt="pdf"></td>
+            </tr>
+
+        </tbody>
+
+        <tbody *ngIf="asesorias.length == 0">
+            <tr>
+                <td colspan="4">No tiene Asesorias aún</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination-controls *ngIf="asesorias.length != 0" id="basicPaginate" (pageChange)="pageChanged($event)">
+        </pagination-controls>
+
+    </div>
+</div>

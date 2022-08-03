@@ -1,0 +1,96 @@
+
+<app-ficha-light *ngIf="id!"></app-ficha-light>
+<img  src="../../../assets/imagenes/login/add.png" class="bi me-2 imgs" width="50%" role="img" aria-label="Bootstrap">
+<h2 *ngIf="id!">AGREGAR PARCELA</h2>
+<h2 *ngIf="idpar!">EDITAR PARCELA</h2>
+<form [formGroup]="registroForm" (ngSubmit)="registrarSubmit()">
+  <div class="form-group container ss">
+    <div class="row mt-3">
+    
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input type="text" formControlName="nombre" matInput placeholder="Nombre Parcela">
+        <mat-error *ngIf="this.registroForm.controls['nombre'].invalid && this.registroForm.controls['nombre'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Medidas</mat-label>
+        <input type="text" formControlName="medidas" matInput placeholder="ej: 10m2 x 10m2">
+        <mat-error *ngIf="this.registroForm.controls['medidas'].invalid && this.registroForm.controls['medidas'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Rendimiento</mat-label>
+        <input type="text" formControlName="rendimiento" matInput placeholder="Rendimiento">
+        <mat-error *ngIf="this.registroForm.controls['rendimiento'].invalid && this.registroForm.controls['rendimiento'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      
+    </div>
+    <div class="row">
+  
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Cultivo</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Cultivo"
+               matInput
+               formControlName="cultivo"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="this.registroForm.controls['cultivo'].invalid && this.registroForm.controls['cultivo'].touched">Campo requerido</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Calle</mat-label>
+        <input type="text" formControlName="calle" matInput placeholder="Calle">
+        <mat-error *ngIf="this.registroForm.controls['calle'].invalid && this.registroForm.controls['calle'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Colonia</mat-label>
+        <input type="text" formControlName="colonia" matInput placeholder="Colonia">
+        <mat-error *ngIf="this.registroForm.controls['colonia'].invalid && this.registroForm.controls['colonia'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Cuidad</mat-label>
+        <input type="text" formControlName="cuidad" matInput placeholder="Cuidad">
+        <mat-error *ngIf="this.registroForm.controls['cuidad'].invalid && this.registroForm.controls['cuidad'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Estado</mat-label>
+        <input type="text" formControlName="estado" matInput placeholder="estado">
+        <mat-error *ngIf="this.registroForm.controls['estado'].invalid && this.registroForm.controls['estado'].touched">Campo requerido</mat-error>
+      </mat-form-field>
+
+
+    </div>
+
+
+    <div class="row" style="display: flex; justify-content:center;">
+      <div class="form-group col-md-4 mt-3">
+        <button *ngIf="id!" [disabled]="registroForm.invalid" type="submit" class="btn btn-primary btn-lg w-100">
+          <!-- [disabled] = "registroForm.invalid" -->
+          <i class="bi bi-save"></i>
+          Registrar
+        </button>
+        <button *ngIf="idpar!" [disabled]="registroForm.invalid" type="submit" class="btn btn-primary btn-lg w-100">
+          <!-- [disabled] = "registroForm.invalid" -->
+          <i class="bi bi-save"></i>
+          Actualizar
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</form>

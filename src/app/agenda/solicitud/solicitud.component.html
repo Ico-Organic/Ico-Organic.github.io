@@ -1,0 +1,136 @@
+<app-ficha-light *ngIf="idUser!"></app-ficha-light>
+
+<form [formGroup]="registroForm" (ngSubmit)="registrarSubmit()">
+    <div class="form-group container ss">
+        <div class="row mt-3">
+         
+            <div *ngIf="IsMasCoun == true" >
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label *ngIf=" IsUs == 'Productor'  ">Ingeniero</mat-label>
+                    <mat-label *ngIf=" IsUs == 'Ingeniero' ">Productor</mat-label>
+                    <mat-select (selectionChange)="chooseUser($event.value)" formControlName="solicitorTo">
+                        <mat-option *ngFor="let option of usuario" [value]="option._id">{{ option.nombre }} {{
+                            option.apellidoPa }} {{ option.apellidoMa }}</mat-option>
+                    </mat-select>
+                    <mat-error
+                        *ngIf="this.registroForm.controls['solicitorTo'].invalid && this.registroForm.controls['solicitorTo'].touched">
+                        *Este campo es requerido</mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field  class="example-full-width" appearance="fill">
+                <mat-label>Parcela</mat-label>
+                <mat-select formControlName="parcela">
+                    <mat-option *ngIf="parcelas.length == 0">NO TIENE PARCELAS AGREGADAS</mat-option>
+                    <mat-option *ngIf="parcela.length == 0">NO TIENE PARCELAS AGREGADAS</mat-option>
+
+                    <mat-option *ngFor="let par of parcela" [value]="par._id">{{ par.nombre }} - {{ par.cuidad }}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="this.registroForm.controls['parcela'].invalid && this.registroForm.controls['parcela'].touched">
+                    *Este campo es requerido</mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div class="row mt-3">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de inicio</mat-label>
+                <input matInput formControlName="fechaIni" #datr (dateChange)="SelectDate(datr.value)"
+                    [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error
+                    *ngIf="this.registroForm.controls['fechaIni'].invalid && this.registroForm.controls['fechaIni'].touched">
+                    *Este campo es requerido</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha final</mat-label>
+                <!-- #docregion toggle -->
+                <input matInput formControlName="fechaFin"  name="fechaFin" id="fechaFin" [matDatepicker]="picker1">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error
+                    *ngIf="this.registroForm.controls['fechaFin'].invalid && this.registroForm.controls['fechaFin'].touched">
+                    *Este campo es requerido</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Hora Inicio</mat-label>
+                <input formControlName="horaIni" type="time" (change)="SelectHour()" matInput placeholder="Titulo">
+                <mat-error
+                    *ngIf="this.registroForm.controls['horaIni'].invalid && this.registroForm.controls['horaIni'].touched">
+                    *Este campo es requerido</mat-error>
+
+            </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Hora Final</mat-label>
+                <input formControlName="horaFin" type="time" matInput placeholder="Titulo">
+                <mat-error
+                    *ngIf="this.registroForm.controls['horaFin'].invalid && this.registroForm.controls['horaFin'].touched">
+                    *Este campo es requerido</mat-error>
+
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Titulo</mat-label>
+                <input formControlName="title" matInput placeholder="Titulo">
+                <mat-error
+                    *ngIf="this.registroForm.controls['title'].invalid && this.registroForm.controls['title'].touched">
+                    *Este campo es requerido</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput formControlName="description" cols="30" rows="10"
+                    placeholder="Descripcion..."></textarea>
+                <mat-error
+                    *ngIf="this.registroForm.controls['description'].invalid && this.registroForm.controls['description'].touched">
+                    *Este campo es requerido</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Tipo de cita</mat-label>
+                <mat-select  formControlName="tipo">
+                    <mat-option value="REUNION">REUNION</mat-option>
+                    <mat-option value="CAPACITACION">CAPACITACION</mat-option>
+                    <mat-option value="NEGOCIOS">NEGOCIOS</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="this.registroForm.controls['tipo'].invalid && this.registroForm.controls['tipo'].touched">
+                    *Este campo es requerido</mat-error>
+            </mat-form-field>
+
+
+
+        </div>
+
+
+        <div class="row" style="display: flex; justify-content:center;">
+            <div class="form-group col-md-4 mt-3">
+                <button [disabled]="registroForm.invalid" type="submit" class="btn btn-primary btn-lg w-100">
+                    <!-- [disabled] = "registroForm.invalid" -->
+                    <i class="bi bi-save"></i>
+                    ENVIAR
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,71 @@
+#cs{
+    background: #6EA96F !important;
+    border-bottom: .2px solid #000;
+}
+.mybtnclass{
+  color: white;
+}
+.nav-link{
+    color: #ffff;
+    text-decoration: none;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mybtnclass:hover{
+    color: #000;
+  }
+  .mytoolbar{
+    background: #6EA96F;
+    position: static;
+  }
+#cs{
+    padding-bottom: 0px !important;
+    margin-bottom: 5em !important;
+}
+.example-container {
+position: static;
+
+}
+.example-spacer {
+  flex : 1  1 auto;
+}
+.example-sidenav-content {
+
+  max-height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+::ng-deep #cs2{
+  z-index: 500;
+  width:100vw;
+  position: fixed  !important;
+  background: #6EA96F;
+  top: 0;
+}
+.sal2{
+  position: absolute;
+  background: #6EA96F !important;
+  top: 3em !important;
+}
+
+
+::ng-deep .mat-drawer.mat-drawer-side{
+  position: fixed;
+  display: block;
+  z-index: 999!important;
+  top: 4em !important;
+  width: 64%;
+  background: #2e442dcc;
+  left: 0;
+  color: white;
+}
+/* ::ng-deep .mat-toolbar-multiple-rows{
+  flex-direction: column-reverse !important;
+} */

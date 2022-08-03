@@ -1,0 +1,43 @@
+<div class="sty">
+    <div style="display: flex;">
+        <div style="width: 30%;">
+            <img src="../../../assets/imagenes/login/cara.png" width="120%" class="pad" role="img"
+            aria-label="Bootstrap">
+        
+        </div>
+        <div style="width: 70%;">
+            <p><b> {{productor.nombre}} {{productor.apellidoPa}} {{productor.apellidoMa}}</b></p>
+            <p><b>{{productor.telefono}}</b>  </p>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div *ngIf="exist == true || existIng == false" class="izq">
+    <button [routerLink]="['/editar-parcela/',id]" mat-mini-fab class="colorico" aria-label="parcela">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+</div>
+<app-ficha-parcela>
+
+</app-ficha-parcela>
+
+
+<app-view-asesorias></app-view-asesorias>
+
+
+<div *ngIf="existIng == true ">
+    <div   class="izq topb">
+   <button (click)="DarAsesoria()" mat-mini-fab class="colorico" aria-label="Asesorias">
+       <mat-icon>note_add</mat-icon>
+     </button>
+
+</div>
+
+
+
+
+

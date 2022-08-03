@@ -1,0 +1,64 @@
+
+
+
+<div *ngIf="existIng == 'Productor' ">
+    <div >
+        
+        <div>
+                <h2 style="text-align: center; padding-top: 1em;">PARCELAS</h2>
+    
+                <div style="padding-top: 2em;" *ngIf="productores.length != 0">
+                    <div style="display: flex; padding-bottom: 1em;" class="tarje"
+                        *ngFor="let prod of productores | paginate: config2" (click)="SelectParc(prod)">
+    
+                        <img src="../../../assets/imagenes/login/icon-parcela.png" width="30%" role="img"
+                            aria-label="Bootstrap">
+                        <div><b>NOMBRE:</b>
+                            <p>{{prod.nombre}}</p>
+                            <b>CULTIVO:</b>
+                            <p>{{prod.cultivo}} </p>
+                        </div>
+                        <div><b>MEDIDAS:</b>
+                            <p> {{prod.medidas}}</p>
+                            <div><b>RENDIMIENTO:</b>
+                                <p> {{prod.rendimiento}}</p>
+                            </div>
+                        </div>
+                        <div class="line">
+    
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="productores.length== 0">
+                    <div style=" padding: 1em;">
+    
+                        <h3 style="text-align: center;">No tiene Parcelas registradas</h3>
+    
+                    </div>
+                </div>
+    
+                <div class="pad-1">
+                    <pagination-controls *ngIf="productores.length != 0" id="basicPaginate2"
+                        (pageChange)="pageChanged2($event)">
+                    </pagination-controls>
+    
+                </div>
+        </div>
+    
+    </div>
+    
+</div>
+
+
+
+<div  *ngIf="existIng == 'Productor' ">
+    <div >
+        <app-view-asesorias></app-view-asesorias>
+
+    </div>
+</div>
+
+<div class="izq topb"  *ngIf="existIng2 == true ">
+    <button type="button" [routerLink]="['/agendar/',user]" *ngIf="productores.length != 0 && existIng == 'Productor'"
+        class="btn btn-success">CREAR CITA</button>
+</div>

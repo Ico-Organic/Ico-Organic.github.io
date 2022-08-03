@@ -1,0 +1,61 @@
+<header id="cs"
+  class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  
+  <mat-toolbar class="mytoolbar">
+    <mat-toolbar-row id="cs2">
+      <span> <a [routerLink]="['home']"
+          class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+          <img src="../../../assets/imagenes/login/logo-ico.png" class="bi me-2" width="140" height="62" role="img"
+            aria-label="Bootstrap">
+        </a></span>
+        <span class="example-spacer"></span>
+        <span class="example-spacer"></span>
+    
+      <span class="example-spacer"></span>
+    
+ 
+    <span class="example-spacer"></span>
+    <span class="example-spacer"></span>
+
+    
+      <button *ngIf="exist.length!= 0" mat-icon-button [matMenuTriggerFor]="menu" class="mybtnclass"
+        aria-label="Example icon-button with a menu">
+        <mat-icon>dashboard</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+        <mat-menu  #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/perfil/',user.id]">
+            <mat-icon>account_circle</mat-icon>
+            <span  >
+                Perfil
+            </span>
+          </button>
+          <button mat-menu-item [routerLink]="['/editar-usuarios/',user.id]">
+            <mat-icon>edit</mat-icon>
+            <span >Editar perfil</span>
+          </button>
+          <button mat-menu-item  [routerLink]="['/crear-parcela/',user.id]" >
+            <mat-icon>add_circle</mat-icon>
+            <span >Agregar parcela</span>
+          </button>
+          <button mat-menu-item (click)="logOut()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span >Salir</span>
+          </button>
+        
+        </mat-menu>  
+      
+    </mat-toolbar-row>
+    <mat-toolbar-row class="sal2" *ngIf="exist.length!= 0">
+      <div  style="color:white; font-size: 16px;    display: contents;" >
+            <p > BIENVENIDO </p>
+        <span class="example-spacer"></span>
+
+            <p *ngIf="user!"><b>{{user.nom}}</b></p>
+      </div>
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+</header>
+

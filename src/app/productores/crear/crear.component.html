@@ -1,0 +1,126 @@
+  <img  src="../../../assets/imagenes/login/add.png" class="bi me-2 imgs" width="50%" role="img" aria-label="Bootstrap">
+<h2 *ngIf="!productor.id" >AGREGAR</h2>
+<h2 *ngIf="productor.id!" >EDITAR USUARIO</h2>
+
+<form [formGroup]="registroForm" (ngSubmit)="registrarSubmit()">
+
+  <div class="form-group container ss">
+
+    <div class="row mt-3">
+    
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" matInput placeholder="Nombre">
+        <mat-error *ngIf="this.registroForm.controls['nombre'].invalid && this.registroForm.controls['nombre'].touched">Campo requerido</mat-error>
+
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Apellido Paterno</mat-label>
+        <input formControlName="apellidoPa" matInput placeholder="Apellido Paterno">
+        <mat-error *ngIf="this.registroForm.controls['apellidoPa'].invalid && this.registroForm.controls['apellidoPa'].touched">Campo requerido</mat-error>
+
+      </mat-form-field>
+     
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Apellido Materno</mat-label>
+        <input formControlName="apellidoMa" matInput placeholder="Apellido Materno">
+        <mat-error *ngIf="this.registroForm.controls['apellidoMa'].invalid && this.registroForm.controls['apellidoMa'].touched">Campo requerido</mat-error>
+
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      
+      <div class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Correo:</mat-label>
+          <input matInput placeholder="pat@example.com" formControlName="correo" required>
+          <mat-error *ngIf="this.registroForm.controls['correo'].invalid && this.registroForm.controls['correo'].touched">Campo requerido</mat-error>
+        </mat-form-field>
+      </div>
+     
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Telefono</mat-label>
+        <span matPrefix>+52 &nbsp;</span>
+        <input  formControlName="telefono" type="tel" matInput placeholder="735-352-1234">
+        <mat-icon matSuffix> phone</mat-icon>
+        <mat-error *ngIf="this.registroForm.controls['telefono'].invalid && this.registroForm.controls['telefono'].touched">Campo requerido</mat-error>
+
+      </mat-form-field>
+
+      <div *ngIf="!productor.id" >
+
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <button class="mybtnclass" mat-icon-button matSuffix (click)="hiden2()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="this.registroForm.controls['password'].invalid && this.registroForm.controls['password'].touched">*Minimo 6 digitos (caracteres y numeros)</mat-error>
+
+     
+        </mat-form-field>
+
+      </div>
+    </div>
+   
+    <div class="row">
+    
+      <div *ngIf="!productor.id" >
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Rol del usuario</mat-label>
+          <mat-select formControlName="rol" name="rol">
+            <mat-option value="Productor" >
+              Productor
+            </mat-option>
+            <mat-option value="Ingeniero">
+              Ing. Agricola
+            </mat-option>
+            <mat-error *ngIf="this.registroForm.controls['rol'].invalid && this.registroForm.controls['rol'].touched">*Minimo 6 digitos (caracteres y numeros)</mat-error>
+            
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div *ngIf="!productor.id" >
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="status" name="status">
+         
+          <mat-option value="HABILITADO" >
+            HABILITADO
+          </mat-option>
+          <mat-option value="DESABILITADO">
+            DESABILITADO
+          </mat-option>
+          <mat-error *ngIf="this.registroForm.controls['status'].invalid && this.registroForm.controls['status'].touched">*Minimo 6 digitos (caracteres y numeros)</mat-error>
+          
+        </mat-select>
+      </mat-form-field>
+    </div>
+   
+
+
+    <div class="row" style="display: flex; justify-content:center;">
+      <div class="form-group col-md-4 mt-3">
+        <button *ngIf="!productor.id"  [disabled]="registroForm.invalid" type="submit" class="btn btn-primary btn-lg w-100">
+          <!-- [disabled] = "registroForm.invalid" -->
+          <i class="bi bi-save"></i>
+          REGISTRAR
+        </button>
+        <button *ngIf="productor.id!" [disabled]="registroForm.invalid" type="submit" class="btn btn-primary btn-lg w-100">
+          <!-- [disabled] = "registroForm.invalid" -->
+          <i class="bi bi-save"></i>
+          ACTUALIZAR
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</form>

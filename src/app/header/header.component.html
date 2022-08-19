@@ -34,7 +34,7 @@
             <mat-icon>edit</mat-icon>
             <span >Editar perfil</span>
           </button>
-          <button mat-menu-item  [routerLink]="['/crear-parcela/',user.id]" >
+          <button mat-menu-item *ngIf="ing != true" [routerLink]="['/crear-parcela/',user.id]" >
             <mat-icon>add_circle</mat-icon>
             <span >Agregar parcela</span>
           </button>

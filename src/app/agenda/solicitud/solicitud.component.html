@@ -4,7 +4,7 @@
     <div class="form-group container ss">
         <div class="row mt-3">
          
-            <div *ngIf="IsMasCoun == true" >
+            <div *ngIf="!idUser || IsMasCoun == true">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label *ngIf=" IsUs == 'Productor'  ">Ingeniero</mat-label>
                     <mat-label *ngIf=" IsUs == 'Ingeniero' ">Productor</mat-label>

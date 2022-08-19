@@ -10,6 +10,7 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   public exist:any
+  public ing:Boolean = false
   public user:any={
     nom:"",
     id:""
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.exist = this._AuthGuard.existelogin() 
+    this.ing = this._AuthGuard.IsIng() 
     this.Bienvenido()
   }
   logOut() {

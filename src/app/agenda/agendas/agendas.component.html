@@ -1,7 +1,10 @@
+<h2 style="text-align: center; padding-top: 2em; margin-bottom: -1em;">CALENDARIO DE CITAS</h2>
+<div class="izq topb"  >
+  <button type="button" [routerLink]="['/agendar/',user.id]" 
+      class="btn btn-success" style="margin-bottom: 1em;">AGENDAR</button>
+</div>
 
-<h2 style="text-align: center; padding-top: 1em;">CALENDARIO DE CITAS</h2>
 <full-calendar *ngIf="calendarVisible" #Calendar [options]='calendarOptions'></full-calendar>
-
 <div class="modal-dialog modal-lg">
   <ng-template #modalContent >
     <div class="modal-header">

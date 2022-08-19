@@ -19,7 +19,7 @@ const Agendar: Agenda = {
   providedIn: 'root'
 })
 export class ServiciosService {
-  url = environment.url + '/api/servicios/';
+  url = environment.url + 'servicios/';
   private agenda$ = new BehaviorSubject<Agenda>(Agendar)
   /* http://localhost:4000/api*/
   constructor(private http: HttpClient) { }

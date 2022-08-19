@@ -12,7 +12,7 @@ const parcela: Parcela = {
   providedIn: 'root'
 })
 export class ParcelaService {
-  url = environment.url+'/api/parcela/';
+  url = environment.url+'parcela/';
   private parcela$ = new BehaviorSubject<Parcela>(parcela)
   constructor(private http: HttpClient) { }
 

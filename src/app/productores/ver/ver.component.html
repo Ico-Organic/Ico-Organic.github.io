@@ -1,31 +1,80 @@
 <h2 style="text-transform: uppercase;">{{tipo}}</h2>
 <div class="izq">
-    <button type="button" *ngIf="exist == true" style="text-decoration: none"  [routerLink]="['/agregar-usuarios']" class="btn btn-success ss">AGREGAR {{tipo}}</button>
+    <button type="button" *ngIf="exist == true" style="text-decoration: none" [routerLink]="['/agregar-usuarios']"
+        class="btn btn-success ss">AGREGAR {{tipo}}</button>
 </div>
 <div class="marg">
+    <mat-form-field appearance="legacy" class="example-full-width">
+        <mat-label>BUSCADOR</mat-label>
+        <input #nombre (keyup)="Search(nombre.value)" matInput placeholder="Juanito...">
+        <mat-icon (click)="Search(nombre.value)" matSuffix>search</mat-icon>
+    </mat-form-field>
     <table class="table mar">
         <thead class="thead-dark">
             <tr>
                 <th colspan="2" scope="col">NOMBRE</th>
-                <th scope="col">TELEFONO</th>
+                <th scope="col">TELEFONO
+                </th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody *ngIf="productoresSelec.length != 0 ">
-            <tr *ngFor="let prod of productoresSelec | paginate: config" (click)="ChoosePac(prod._id)">
-                <td colspan="2" >{{ prod.nombre }} {{ prod.apellidoPa }}</td>
-                <td>{{ prod.telefono }}</td>
+            <tr *ngFor="let prod of productoresSelec | paginate: config">
+                <td (click)="ChoosePac(prod._id)" colspan="2">{{ prod.nombre }} {{ prod.apellidoPa }}</td>
+                <td (click)="ChoosePac(prod._id)">{{ prod.telefono }}</td>
+
+                <td>
+
+                    <button mat-icon-button id="btnmodal" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+
+
+                </td>
+                <mat-menu #menu="matMenu">
+                    <a href='https://api.whatsapp.com/send?phone={{prod.telefono}}'>
+                        <button mat-menu-item>
+                            <mat-icon>phone</mat-icon>
+                            <span>WhatsApp</span>
+                        </button>
+                    </a>
+                    <a href="tel:+{{prod.telefono}}"></a>
+                    <button mat-menu-item >
+                        <mat-icon>voicemail</mat-icon>
+                        <span>Lamada telefonica</span>
+                    </button>
+                   
+                </mat-menu>
             </tr>
 
         </tbody>
-      
+
         <tbody *ngIf="productoresSelec.length == 0">
             <tr>
-                <td>No hay conexión a internet</td>
+                <td style="text-align: center;">{{cargando}}</td>
             </tr>
         </tbody>
     </table>
     <div>
         <pagination-controls id="basicPaginate" (pageChange)="pageChanged($event)"></pagination-controls>
+
+    </div>
+</div>
+
+<div class="marg">
+    <table class="table mar">
+
+        <tbody id="abc">
+            <tr *ngFor="let prod of abcarr | paginate: config2" (click)="selecLetter(prod)">
+                <td>{{prod}}</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+    <div>
+        <pagination-controls id="basicPaginate21" (pageChange)="pageChanged1($event)"></pagination-controls>
 
     </div>
 </div>

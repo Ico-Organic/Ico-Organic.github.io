@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductoService {
-  url = environment.url+'/api/productos/';
+  url = environment.url+'productos/';
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<any> {

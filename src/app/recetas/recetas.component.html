@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="sincon == false">
     <form [formGroup]="addEventForm2">
         <select #selectList *ngIf="productores.length != 0" id="SelecServ" class="form-control si"
             (change)="chooseprod(selectList.value)" formControlName="productor" name="productor" id="productor">
@@ -6,7 +6,7 @@
             <option #value *ngFor="let prod of productores" value="{{prod._id}}">{{ prod.nombre }} {{ prod.apellidoPa }}
             </option>
         </select>
-
+ 
         <select #selectList2 id="SelecServ" class="form-control si" formControlName="parcela"
             (change)="choosepar(selectList2.value)" name="parcela" id="parcela">
             <option selected value="">Seleccione Parcela</option>
@@ -14,6 +14,8 @@
         </select>
     </form>
 </div>
+<mat-slide-toggle (change)="SinRegistro()" #event  >Receta sin registro</mat-slide-toggle>
+
 <div class="container">
     <h2 style="text-transform: uppercase; text-align: center">asesoría técnica</h2>
     <div>

@@ -32,7 +32,7 @@
                 <div *ngIf="productores.length== 0">
                     <div style=" padding: 1em;">
     
-                        <h3 style="text-align: center;">No tiene Parcelas registradas</h3>
+                        <h3 style="text-align: center;">Cargando datos...</h3>
     
                     </div>
                 </div>
@@ -58,7 +58,3 @@
     </div>
 </div>
 
-<div class="izq topb"  *ngIf="existIng2 == true ">
-    <button type="button" [routerLink]="['/agendar/',user]" *ngIf="productores.length != 0 && existIng == 'Productor'"
-        class="btn btn-success">CREAR CITA</button>
-</div>

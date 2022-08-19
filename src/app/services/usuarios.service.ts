@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuariosService {
-  url = environment.url+'/api/usuarios/';
+  url = environment.url+'usuarios/';
  /* http://localhost:4000/api*/
   constructor(private http: HttpClient) { }
 
@@ -31,6 +31,10 @@ export class UsuariosService {
     return this.http.put(url, body )
   }
 
+  UpdatePassword(id:string, body:any) {
+    let url = `${this.url}passwords/${id}` 
+    return this.http.put(url, body )
+  }
 
   guardarUsuario(usuario: Usuarios): Observable<any> {
     return this.http.post(this.url, usuario);

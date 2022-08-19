@@ -15,9 +15,12 @@ export class CrearComponent implements OnInit {
   public productor: any = {
     id: "",
   }
-  public hide:Boolean = true;
+
+   hide = true;
+   hide2 = true;
   mostrarContrasena: boolean = false;
   registroForm: FormGroup;
+  FormPass: FormGroup;
   paso = false;
 
   constructor(
@@ -31,16 +34,22 @@ export class CrearComponent implements OnInit {
       rol: new FormControl([], [Validators.required]),
       correo: new FormControl([], [Validators.required, Validators.email]),
       password: new FormControl([], [Validators.required, Validators.minLength(6)]),
-      telefono: new FormControl([], [Validators.required]),
+      telefono: new FormControl([], [Validators.minLength(10),Validators.maxLength(10),Validators.required]),
       status: new FormControl(["HABILITADO"],[Validators.required]),
 
+    })
+    this.FormPass = new FormGroup({
+      pass1: new FormControl([], [Validators.required, Validators.minLength(6)]),
+      pass2: new FormControl([], [Validators.required, Validators.minLength(6)]),
     })
   }
 
   ngOnInit(): void {
     this.UpdateUser()
   }
- 
+ pass(){
+  this.hide2 = !this.hide2
+ }
   UpdateUser() {
     this.productor.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.productor.id!) {
@@ -62,6 +71,7 @@ export class CrearComponent implements OnInit {
 
     }
   }
+  
   hiden2(){
     return this.hide = !this.hide
   }
@@ -79,10 +89,29 @@ export class CrearComponent implements OnInit {
 
       }
     }
+  }
+  FormPassSubmit(){
+   
+    if(this.FormPass.value.pass1 != ''){
+      if(this.FormPass.value.pass1 == this.FormPass.value.pass2){
+        if (this.FormPass.invalid!) {
+          return
+        } else {
+          if(this.productor.id!){
+            this.ActualizarPassword()
+          }
+        }
+      }else{
+        this.toastr.error('No coiciden las contraseñas', 'Contraseñas incorrectas', {
+          positionClass: 'toast-top-right'
+        });
+        
 
+      } 
 
-
-
+    }
+    
+  
   }
   agregarEmpleado() {
 
@@ -97,15 +126,10 @@ export class CrearComponent implements OnInit {
       status: 'HABILITADO'
     }
     this._UsuariosService.guardarUsuario(Usuario).subscribe(data => {
-      this.toastr.success('El productor fue registrado con exito!', 'Productor Registrado', {
-        positionClass: 'toast-bottom-right'
+      this.toastr.success('El Usuario fue registrado con exito!', 'Usuario Registrado', {
+        positionClass: 'toast-top-right'
       });
-      Swal.fire({
-        icon: 'success',
-        title: 'USUARIO CREADO',
-        text: 'Se guardó exitosamente',
-
-      });
+  
       this.router.navigate(['/home']);
     }, error => {
       console.log(error);
@@ -127,18 +151,42 @@ export class CrearComponent implements OnInit {
     this._UsuariosService.UpdateUsuario(this.productor.id,UsuarioUp).subscribe(data => {
       console.log(data);
       
-      this.toastr.success('El productor fue Actualizado con exito!', 'Usuario Actualizado', {
-        positionClass: 'toast-bottom-right'
+      this.toastr.success('El Usuario fue Actualizado con exito!', 'Usuario Actualizado', {
+        positionClass: 'toast-top-right'
       });
-      Swal.fire({
-        icon: 'success',
-        title: 'USUARIO ACTUALIZADO',
-        text: 'Se actualizó exitosamente',
 
-      });
       this.router.navigate(['/usuarios/',this.productor.id]);
     }, error => {
       console.log(error);
+    })
+  }
+  ActualizarPassword() {
+    
+    const UsuarioPs: Usuarios = {
+      password: this.FormPass.value.pass2,
+    }
+
+    console.log(UsuarioPs);
+    
+    this._UsuariosService.UpdatePassword(this.productor.id,UsuarioPs).subscribe(data => {
+      
+      this.toastr.success('Contraseña se cambió exitosamente!', 'Contraseña Actualizada', {
+        positionClass: 'toast-top-right'
+      });
+        localStorage.removeItem('UsuarioLogin')
+        this.router.navigate(['/login'])
+
+        setTimeout((): void => {
+          window.location.reload()
+
+        }, 500)
+
+      this.router.navigate(['/usuarios/',this.productor.id]);
+    }, error => {
+      
+      this.toastr.error('Contraseña no se cambió!', 'Contraseña no actualizada', {
+        positionClass: 'toast-top-right'
+      });
     })
   }
 }

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  
-  url: 'https://git.heroku.com/ico-organic.git',
+   
+  url: 'https://ico-organic.herokuapp.com/',
 }
 
 /*

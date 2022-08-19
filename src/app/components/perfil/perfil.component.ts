@@ -103,79 +103,84 @@ console.log(this.citas2);
   }
   
   getMydatesId() {
-    console.log("holis");
 
-    this._ServiciosService.getCitasIdAll(this.user.id).subscribe(data => {
+    console.log(this.user.id);
+
+    this._ServiciosService.getCitasIdAll(this.user.id).subscribe((data:any) => {
+    console.log("--------------------------------------------------------1");
       console.log("aqui comienzas");
       console.log(data);
       this.citas = data
       this.TypeDates()
+    },error =>{
+      console.log(error);
+      
     });
   
 
   }
   getMydatesIdBy() {
-    console.log("holis");
-
+    
     this._ServiciosService.getCitasIdAllBy(this.user.id).subscribe(data => {
-      console.log("aqui comienzas");
-        console.log("BYYYYYYYYYYYYYYY");
-        
-      console.log(data);
-      
+
       this.citas2 = data
       console.log(this.citas2);
       
       this.TypeDatesBy()
 
+    },error =>{
+      console.log(error);
+      
     });
+  
   
 
   }
   TypeDates() {
     let date = this.ObtenerFecha()
+    console.log(date);
+    console.log(this.citas2);
   
     this.citas.forEach((element: any) => {
-      console.log(element);
-
       if (element.status == 'PENDIENTE') {
         this.citasPendientes.push(element)
       }
-
       if (element.fechaIni == date && element.status == 'APROBADA') {
-        console.log(element);
-        
         this.citasHoy.push(element)
       }
       if (element.status!) {
-
         this.citasAll.push(element)
       }
-
+   
     });
+    console.log("------------------------------------3.1");
+    console.log(this.citas2);
+
+    console.log(this.citasAll);
+    console.log(this.citasHoy);
+    console.log(this.citasPendientes);
   }
   TypeDatesBy() {
     let date = this.ObtenerFecha()
   
     this.citas2.forEach((element: any) => {
-      console.log(element);
-
       if (element.status == 'PENDIENTE') {
         this.citasPendientes2.push(element)
       }
-      console.log(date);
-      
       if (element.fechaIni == date && element.status == 'APROBADA') {
-        console.log(element);
-        
         this.citasHoy2.push(element)
       }
       if (element.status!) {
-
         this.citasAll2.push(element)
       }
-
+     
+     
     });
+    console.log("------------------------------------3");
+    console.log(this.citasAll2);
+    console.log(this.citasHoy2);
+    console.log(this.citasPendientes2);
+    
   }
  
   pageChanged3(event: any) {
@@ -185,15 +190,21 @@ console.log(this.citas2);
     this.config4.currentPage = event;
   }
   Update(item:any,status:any){
+    console.log(item);
+    
     this._ServiciosService.UpdateCitaStatus(item._id,status).subscribe(data => {
       console.log(data);
+      
       Swal.fire({
         icon: 'success',
-        title: 'CITA'+ status,
+        title: 'CITA ACTUALIZADA',
         text: 'Correctamente',
 
       })
      
+    },error =>{
+      console.log(error);
+      
     });
   }
   cancelarcita(event: any,item:any, index: any) {
@@ -201,6 +212,17 @@ console.log(this.citas2);
     const status: Agenda = {
       status: 'CANCELADA'
     }
+console.log("-----------------------------");
+
+    console.log(item);
+    console.log(status);
+    console.log(index);
+    
+    this.citasPendientes.forEach((element:any) => {
+        console.log(element);
+        
+    });
+  
     this.Update(item,status)
 
     this.aceptarCita(event, item, index,'back')
@@ -210,13 +232,12 @@ console.log(this.citas2);
     else if (event == "hoy") {
       return this.citasHoy.splice(index, 1)
     }
-    else if (event == "all") {
-      return this.citasAll.splice(index, 1)
-    }
+ 
     
   }
   aceptarCita(event: any, item: any, index: any, Qo:any) {
     console.log(event);
+    console.log("1---------");
     
     let si = this.isHoy(item)
     console.log(si);
@@ -235,19 +256,18 @@ console.log(this.citas2);
         this.citasHoy.push(item)
 
       }
-      this.citasAll.push(item)
 
     }
 
 
   }
   cancelarcita2(event: any,item:any, index: any) {
- 
+
     const status: Agenda = {
       status: 'CANCELADA'
     }
     this.Update(item,status)
-    item.status = 'CANCELADA'
+   
     this.aceptarCita2(event, item, index,'back')
     if (event == "pen") {
       return this.citasPendientes2.splice(index, 1)
@@ -255,13 +275,11 @@ console.log(this.citas2);
     else if (event == "hoy") {
       return this.citasHoy2.splice(index, 1)
     }
-    else if (event == "all") {
-      return this.citasAll2.splice(index, 1)
-    }
+    
     
   }
   aceptarCita2(event: any, item: any, index: any, Qo:any) {
-    console.log(event);
+
     
     let si = this.isHoy(item)
     console.log(si);
@@ -273,13 +291,13 @@ console.log(this.citas2);
       this.Update(item,status)
       item.status = 'APROBADA'
     }
-    this.citasPendientes.splice(index,1)
+    this.citasPendientes2.splice(index,1)
     if (event == 'pen') {
       if (si == true) {
         this.citasHoy2.push(item)
 
       }
-      this.citasAll2.push(item)
+    
 
     }
 
@@ -296,7 +314,7 @@ console.log(this.citas2);
     }
   }
   AgregarReceta(eventPar:any,eventBy:any,evenetId:any){
-    /**item.parcela._id,item.solicitorBy._id,item._id */
+   
     const agenda: Receta ={
       productor:eventBy,
       sta:'PENDIENTE',

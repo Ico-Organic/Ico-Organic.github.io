@@ -11,18 +11,18 @@
             </tr>
         </thead>
         <tbody *ngIf="asesorias.length != 0 ">
-            <tr *ngFor="let prod of asesorias | paginate: config" (click)="ChoosePac(prod)">
+            <tr *ngFor="let prod of asesorias | paginate: config" >
                 <td style=" padding-top: 1.5em;">{{ prod.parcela.nombre }}</td>
                 <td style="width: 30%; padding-top: 1.5em;" colspan="2">{{ prod.fecha.substr(0,10)}} </td>
 
-                <td><img src="../../../assets/imagenes/login/pdf.png" width="30%" class="sed" alt="pdf"></td>
+                <td (click)="CrearPdf(prod)"><img src="../../../assets/imagenes/login/pdf.png" width="30%" class="sed" alt="pdf"></td>
             </tr>
 
         </tbody>
 
         <tbody *ngIf="asesorias.length == 0">
             <tr>
-                <td colspan="4">No tiene Asesorias aún</td>
+                <td colspan="4"> Cargando datos...</td>
             </tr>
         </tbody>
     </table>

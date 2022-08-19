@@ -1,108 +1,130 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import Swal from 'sweetalert2';
-import { masterGuard } from './master.guard';
+import { Injectable } from "@angular/core";
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+  ActivatedRoute,
+} from "@angular/router";
+import { Observable } from "rxjs";
+import Swal from "sweetalert2";
+import { masterGuard } from "./master.guard";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class AuthGuard implements CanActivate {
-  public id: any = []
-  public idresp: any = []
-  public rol: any = []
-  public exist: any = []
+  public id: any = [];
+  public idresp: any = [];
+  public rol: any = [];
+  public exist: any = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-  }
-  canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.IsMaster()
-    this.IsIng()
-    this.IsID()
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    this.IsMaster();
+    this.IsIng();
 
-    this.idresp = route.params['id']
-    this.IsMasterCount()
-    if (localStorage.getItem('UsuarioLogin')!) {
-      return true;
+    this.idresp = route.params["id"];
+    if (this.idresp != undefined) {
+      this.IsMasterCount();
+      this.IsID();
     }
-    else {
-      this.router.navigateByUrl('/login');
+
+    if (localStorage.getItem("UsuarioLogin")!) {
+      return true;
+    } else {
+      this.router.navigateByUrl("/login");
       return false;
     }
   }
 
   existelogin() {
-    if (localStorage.getItem('UsuarioLogin')!) {
-      return localStorage.getItem('UsuarioLogin')
+    if (localStorage.getItem("UsuarioLogin")!) {
+      return localStorage.getItem("UsuarioLogin");
     } else {
-      return []
+      return [];
     }
   }
 
   IsMaster() {
-    let resp: Boolean = false
+    let resp: Boolean = false;
 
-    var users: any = localStorage.getItem('UsuarioLogin');
-    if (localStorage.getItem('UsuarioLogin')!) {
-      this.id = JSON.parse(users).id
-      if (this.id == '62cf4653f43b5132387d5537') {
-        resp = true
-        return resp
+    var users: any = localStorage.getItem("UsuarioLogin");
+    if (localStorage.getItem("UsuarioLogin")!) {
+      this.id = JSON.parse(users).id;
+      if (this.id == "62cf4653f43b5132387d5537") {
+        resp = true;
+        return resp;
       } else {
-        resp = false
-        return resp
+        resp = false;
+        return resp;
       }
     }
-    return resp
+    return resp;
   }
   IsMasterCount() {
-    let resp: Boolean = false
+    let resp: Boolean = false;
 
-    var users: any = localStorage.getItem('UsuarioLogin');
-    if (localStorage.getItem('UsuarioLogin')!) {
-
+    var users: any = localStorage.getItem("UsuarioLogin");
+    if (localStorage.getItem("UsuarioLogin")!) {
       if (this.idresp == JSON.parse(users).id) {
-        resp = true
-        return resp
+        resp = true;
+        return resp;
       } else {
-        resp = false
-        return resp
+        resp = false;
+        return resp;
       }
     }
-    return resp
+    return resp;
   }
   IsIng() {
-    let resp: Boolean = false
+    let resp: Boolean = false;
 
-    var users: any = localStorage.getItem('UsuarioLogin');
-    if (localStorage.getItem('UsuarioLogin')!) {
-      this.rol = JSON.parse(users).rol
-      if (this.rol == 'Ingeniero') {
-        resp = true
-        return resp
+    var users: any = localStorage.getItem("UsuarioLogin");
+    if (localStorage.getItem("UsuarioLogin")!) {
+      this.rol = JSON.parse(users).rol;
+      if (this.rol == "Ingeniero") {
+        resp = true;
+        return resp;
       } else {
-        resp = false
-        return resp
+        resp = false;
+        return resp;
       }
     }
-    return resp
+    return resp;
   }
+
   IsIngString() {
-
-    var users: any = localStorage.getItem('UsuarioLogin');
-    if (localStorage.getItem('UsuarioLogin')!) {
-      return JSON.parse(users).rol
-
+    var users: any = localStorage.getItem("UsuarioLogin");
+    if (localStorage.getItem("UsuarioLogin")!) {
+      return JSON.parse(users).rol;
     }
   }
   IsID() {
-    
-    return  this.idresp
+    return this.idresp;
   }
   IsIDS() {
-    var users: any = localStorage.getItem('UsuarioLogin');
-    return  JSON.parse(users).id
+    var users: any = localStorage.getItem("UsuarioLogin");
+    return JSON.parse(users).id;
+  }
+  IsIDOj() {
+    var users: any = localStorage.getItem("UsuarioLogin");
+    return JSON.parse(users);
+  }
+  IsIngID() {
+    let vari: Boolean;
+
+    vari = this.IsIng();
+    if ((vari = true)) {
+      return this.IsID();
+    }
   }
 }

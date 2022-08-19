@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   
 
      }, error =>{
-console.log(error.status);
+    console.log(error);
       if(error.status == 409){
         this.toastr.error( 'Verifica que tu correo sea correcto','Correo incorrecto', {
        positionClass: 'toast-top-right'

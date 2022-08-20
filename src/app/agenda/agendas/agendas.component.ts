@@ -5,7 +5,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import * as Moment from 'moment'; /// calendario 
+import * as Moment from 'moment'; /// calendario
 import { ServiciosService } from '../../services/servicios.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -60,10 +60,10 @@ export class AgendasComponent implements OnInit {
   }
   events: EventInput[] = [];
 
-  
+
 
   constructor(private _ServiciosService: ServiciosService,private router: Router, private route: ActivatedRoute,private modal: NgbModal,) {
-    
+
   }
   ngOnInit(): void {
     this.user.id = this.route.snapshot.paramMap.get('id')
@@ -75,39 +75,22 @@ export class AgendasComponent implements OnInit {
   }
   hideModal() {
     console.log("cerrar");
-    
+
     this.modal.dismissAll();
   }
   getCitas() {
     console.log("this.user.id");
     console.log(this.user.id);
-    
-    this._ServiciosService.getCitasIdAll(this.user.id).subscribe(data => {
-      
+
+    this._ServiciosService.getCitasId(this.user.id).subscribe(data => {
+
       console.log(data);
 
         this.dates = data
-        this.dates = this.dates.filter((element:any) => element.status == 'APROBADA' ); 
-        console.log(this.dates);
-        this.ShowViewDates(data) 
-    });
-    this._ServiciosService.getCitasIdAllBy(this.user.id).subscribe(data => {
-      
-      console.log(data);
-
-         data.filter((element:any) => 
-         {
-          if(element.status == 'APROBADA' ){
-            this.dates.push(element)
-  
-           }
-         }
-        
-        ); 
-        console.log(this.dates);
         this.ShowViewDates(data)
     });
-    
+
+
   }
 
   calendarVisible = true;
@@ -167,16 +150,7 @@ export class AgendasComponent implements OnInit {
       eventRemove:
       */
     };
-  }/*
-metjhodCalerndar(){
-  var calendar = new Calendar(Calendar, {
-    navLinks: true,
-    navLinkDayClick: function(date, jsEvent) {
-      console.log('day', date.toISOString());
-      console.log('coords', jsEvent.pageX, jsEvent.pageY);
-    }
-  });
-}*/
+  }
 
 
   handleCalendarToggle() {
@@ -190,7 +164,7 @@ metjhodCalerndar(){
 
   handleDateSelect(selectInfo: DateSelectArg) {
     console.log(selectInfo);
-   
+
      this.modal.open(this.modalContent, { size: 'sm' })
      var formattedhours = moment(selectInfo.start, "HH:mm:ss").format("HH:mm");
      var formattedhours2 = moment(selectInfo.end, "HH:mm:ss").format("HH:mm");
@@ -203,7 +177,7 @@ metjhodCalerndar(){
     console.log(formatteddate2);
 
 
- 
+
      const agenda: Agenda ={
         fechaFin:formatteddate,
         fechaIni:formatteddate2,
@@ -307,7 +281,7 @@ metjhodCalerndar(){
           end: timefinal2,
           editable: false,
           color: '#269911'
-         
+
         }
       console.log(eventos)
       this.agregarEvento(eventos);

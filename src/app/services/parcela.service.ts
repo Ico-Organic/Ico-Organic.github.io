@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Parcela } from '../models/Parcela';  
+import { Parcela } from '../models/Parcela';
 import { environment } from 'src/environments/environment';
 
 const parcela: Parcela = {
@@ -34,15 +34,15 @@ export class ParcelaService {
   }
   obtenerParcelaById(id: string): Observable<any> {
     console.log(id);
-    
+
     return this.http.get(this.url+'obs/' + id);
   }
   obtenerParcelaId(id: string): Observable<any> {
     console.log(id);
-    
+
     return this.http.get(this.url+'par/' + id);
   }
-  
+
   get SelectParcela$(): Observable<Parcela> {
     return this.parcela$.asObservable()
   }

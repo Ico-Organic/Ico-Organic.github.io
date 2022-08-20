@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "postinstall": "node remove-css-imports.js"
@@ -40,6 +40,7 @@
     "@material/dialog": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@schematics/angular": "^13.3.8",
+    "angular-cli-ghpages": "^1.0.3",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "crypto-js": "^4.1.1",

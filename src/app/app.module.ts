@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
-
+import 'zone.js/plugins/zone-error';
 // Componentes
 import { AppComponent } from './app.component';
 import { CrearProductoComponent } from './components/productos/crear-producto/crear-producto.component';
@@ -31,7 +31,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FichaLightComponent } from './productores/ficha-light/ficha-light.component';
 import { VerParComponent } from './parcelas/ver-par/ver-par.component';
 import { FichaParcelaComponent } from './parcelas/ficha-parcela/ficha-parcela.component';
-// IMPORTS DE CALENDAR 
+// IMPORTS DE CALENDAR
 //import {BrowserAnimationsModuleConfig } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DashboardComponent } from './components/dashboard/dashboard.component';

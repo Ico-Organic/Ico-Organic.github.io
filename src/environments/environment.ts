@@ -3,9 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-   
-  url: 'https://ico-organic.herokuapp.com/',
+  production: true,
+  url: 'http://localhost:4000/'
 }
 
 /*
